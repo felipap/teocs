@@ -1,0 +1,205 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/12/Screen.jack
+
+/**
+ * Graphic screen library.
+ * screen starts at 16384
+ * it's 512x256
+ * 32 16-bit memory for each row, 256 rows.
+ */
+class Screen {
+
+	static int color;
+	
+    /** Initializes the Screen. */
+    function void init() {
+    	let color=1;
+    	return;
+    }
+
+    /** Erases the whole screen. */
+    function void clearScreen() {
+    	var int i;
+    	let i = 0;
+    	while (i<(32*256+1)) {
+    		do Memory.poke(16384+i, 0);
+    		let i = i+1;
+    	}
+    	return;
+    }
+
+    /** Sets the color to be used in further draw commands
+     *  where white = false, black = true. */
+    function void setColor(boolean b) {
+    	if (b) {
+    		let color = 1;
+    	} else {
+    		let color = 0;
+    	}
+    	return;
+    }
+
+	function int modulo(int a, int b) {
+		return a - ((a/b)*b);
+	}
+	
+	function int pow(int x, int y) {
+		var int i, r;
+		let i = 0;
+		let r = 1;
+		while (i<y) {
+			let r = r*x;
+			let i = i+1;
+		}
+		return r;
+	}
+	
+    /** Draws the (x, y) pixel. */
+    function void drawPixel(int x, int y) {
+    	var int bit, add, value;
+
+		let add = 16384+(32*y)+(x/16);
+    	let value = Memory.peek(add);
+    	let bit = Screen.pow(2, Screen.modulo(x, 16));
+    
+    	if (color) { // white
+			do Memory.poke(add, value|bit);    		
+    	} else {
+    		do Memory.poke(add, value&(~bit));	
+    	}
+    	return;
+    }
+	
+	function void _draw_straight_y(int x, int y1, int y2) {
+		var int d, py;
+		
+		if (y1 > y2) {
+			let py = y1;
+			let y1 = y2;
+			let y2 = py;
+		}
+		
+		let d = 0;
+		while (d<(y2-y1)) {
+			do Screen.drawPixel(x, d+y1);
+			let d = d+1;
+		}
+
+		return;
+	}
+	
+	function void _draw_straight_x(int x1, int x2, int y) {
+		var int d, px;
+		
+		if (x1 > x2) {
+			let px = x1;
+			let x1 = x2;
+			let x2 = px;
+		}
+		
+		let d = 0;
+		while ((x1+d)<x2) {
+			do Screen.drawPixel(x1+d, y);
+			let d = d+1;
+		}
+		
+		return;
+	}
+	
+	function void _draw_line(int x, int y, int dx, int dy) {
+		var int a, b, adyMinusbdx, fa;
+		let a = 0;
+		let b = 0;
+		let adyMinusbdx = 0;
+		
+		let fa = 1;
+		if (dx < 0) {
+			let fa = -1;
+			let dx = -dx;
+		}
+
+		while (((Math.abs(a)<Math.abs(dx))|(Math.abs(a)=Math.abs(dx)))&
+						((b<dy)|(b=dy))) {
+			do Screen.drawPixel(x+a, y+b);
+			if (adyMinusbdx<0) {
+				let a = a+(fa*1);
+				let adyMinusbdx = adyMinusbdx+dy;
+			} else {
+				let b = b+1;
+				let adyMinusbdx = adyMinusbdx-dx;
+			}
+		}
+		return;
+	}
+	
+    /** Draws a line from pixel (x1, y1) to (x2, y2). */
+    function void drawLine(int x1, int y1, int x2, int y2) {
+   		var int px, py;
+   		
+   		if (x1=x2) {
+   			do Screen._draw_straight_y(x1, y1, y2);
+   			return;
+   		}
+   		if (y1=y2) {
+   			do Screen._draw_straight_x(x1, x2, y1);
+   			return;
+   		}
+   		
+    	if (y1>y2) {
+    		let px = x1;
+    		let py = y1;
+    		let x1 = x2;
+    		let y1 = y2;
+    		let x2 = px;
+    		let y2 = py; 
+    	}
+		do Screen._draw_line(x1, y1, x2-x1, y2-y1);
+    	return;
+    }
+
+    function void drawRawRectangle(int x1, int y1, int x2, int y2) {		
+		do Screen.drawLine(x1, y1, x2, y1);
+		do Screen.drawLine(x2, y1, x2, y2);
+		do Screen.drawLine(x1, y2, x2, y2);
+		do Screen.drawLine(x1, y1, x1, y2);
+    	return;
+    }
+
+    /** Draws a filled rectangle where the top left corner
+     *  is (x1, y1) and the bottom right corner is (x2, y2). */
+    function void drawRectangle(int x1, int y1, int x2, int y2) {
+		var int dy, py;
+		
+		if (y2<y1) {
+			let py = y1;
+			let y2 = y1;
+			let y1 = py;
+		}
+		
+		let dy = 0;
+		while (dy<(y2-y1)) {
+			do Screen._draw_straight_x(x1, x2, y1+dy);
+			let dy = dy+1;	
+		}
+		return;
+    }
+
+    /** Draws a filled circle of radius r around (cx, cy). */
+    function void drawCircle(int cx, int cy, int r) {
+    	var int rd, x1, x2, dx;
+    	
+    	let rd = -r;
+    	while (rd<(r+1)) {
+    		let dx = Math.sqrt((r*r)-(rd*rd));
+    		let x1 = cx-dx;
+    		let x2 = cx+dx;
+    		do Screen._draw_straight_x(x1, x2, cy+rd);
+    		
+    		let rd = rd+1;
+    	}
+    	
+    	return;
+    }
+}

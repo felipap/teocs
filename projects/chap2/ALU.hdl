@@ -1,0 +1,175 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/02/ALU.hdl
+
+/**
+ * The ALU.  Computes a pre-defined set of functions out = f(x,y)
+ * where x and y are two 16-bit inputs. The function f is selected 
+ * by a set of 6 control bits denoted zx, nx, zy, ny, f, no.
+ * The ALU operation can be described using the following pseudocode:
+ *     if zx=1 set x = 0       // 16-bit zero constant
+ *     if nx=1 set x = !x      // Bit-wise negation
+ *     if zy=1 set y = 0       // 16-bit zero constant
+ *     if ny=1 set y = !y      // Bit-wise negation
+ *     if f=1  set out = x + y // Integer 2's complement addition
+ *     else    set out = x & y // Bit-wise And
+ *     if no=1 set out = !out  // Bit-wise negation
+ *
+ * In addition to computing out, the ALU computes two 1-bit outputs:
+ *     if out=0 set zr = 1 else zr = 0 // 16-bit equality comparison
+ *     if out<0 set ng = 1 else ng = 0 // 2's complement comparison
+ */
+
+CHIP ALU {
+
+    IN  // 16-bit inputs:
+        x[16], y[16],
+        // Control bits:
+        zx, // Zero the x input
+        nx, // Negate the x input
+        zy, // Zero the y input
+        ny, // Negate the y input
+        f,  // Function code: 1 for add, 0 for and
+        no; // Negate the out output
+
+    OUT // 16-bit output
+        out[16],
+
+        // ALU output flags
+        zr, // 1 if out=0, 0 otherwise
+        ng; // 1 if out<0, 0 otherwise
+
+    PARTS:
+    // Implementation missing.
+    Not(in=zx,out=zxNot);
+    Not(in=zy,out=zyNot);
+    
+    Not(in=f,out=notf);
+
+    And(a=x[0],b=zxNot,out=x0z);
+    Xor(a=nx,b=x0z,out=x0);
+    And(a=x[1],b=zxNot,out=x1z);
+    Xor(a=nx,b=x1z,out=x1);
+    And(a=x[2],b=zxNot,out=x2z);
+    Xor(a=nx,b=x2z,out=x2);
+    And(a=x[3],b=zxNot,out=x3z);
+    Xor(a=nx,b=x3z,out=x3);
+    And(a=x[4],b=zxNot,out=x4z);
+    Xor(a=nx,b=x4z,out=x4);
+    And(a=x[5],b=zxNot,out=x5z);
+    Xor(a=nx,b=x5z,out=x5);
+    And(a=x[6],b=zxNot,out=x6z);
+    Xor(a=nx,b=x6z,out=x6);
+    And(a=x[7],b=zxNot,out=x7z);
+    Xor(a=nx,b=x7z,out=x7);
+    And(a=x[8],b=zxNot,out=x8z);
+    Xor(a=nx,b=x8z,out=x8);
+    And(a=x[9],b=zxNot,out=x9z);
+    Xor(a=nx,b=x9z,out=x9);
+    And(a=x[10],b=zxNot,out=x10z);
+    Xor(a=nx,b=x10z,out=x10);
+    And(a=x[11],b=zxNot,out=x11z);
+    Xor(a=nx,b=x11z,out=x11);
+    And(a=x[12],b=zxNot,out=x12z);
+    Xor(a=nx,b=x12z,out=x12);
+    And(a=x[13],b=zxNot,out=x13z);
+    Xor(a=nx,b=x13z,out=x13);
+    And(a=x[14],b=zxNot,out=x14z);
+    Xor(a=nx,b=x14z,out=x14);
+    And(a=x[15],b=zxNot,out=x15z);
+    Xor(a=nx,b=x15z,out=x15);
+
+    And(a=y[0],b=zyNot,out=y0z);
+    Xor(a=ny,b=y0z,out=y0);
+    And(a=y[1],b=zyNot,out=y1z);
+    Xor(a=ny,b=y1z,out=y1);
+    And(a=y[2],b=zyNot,out=y2z);
+    Xor(a=ny,b=y2z,out=y2);
+    And(a=y[3],b=zyNot,out=y3z);
+    Xor(a=ny,b=y3z,out=y3);
+    And(a=y[4],b=zyNot,out=y4z);
+    Xor(a=ny,b=y4z,out=y4);
+    And(a=y[5],b=zyNot,out=y5z);
+    Xor(a=ny,b=y5z,out=y5);
+    And(a=y[6],b=zyNot,out=y6z);
+    Xor(a=ny,b=y6z,out=y6);
+    And(a=y[7],b=zyNot,out=y7z);
+    Xor(a=ny,b=y7z,out=y7);
+    And(a=y[8],b=zyNot,out=y8z);
+    Xor(a=ny,b=y8z,out=y8);
+    And(a=y[9],b=zyNot,out=y9z);
+    Xor(a=ny,b=y9z,out=y9);
+    And(a=y[10],b=zyNot,out=y10z);
+    Xor(a=ny,b=y10z,out=y10);
+    And(a=y[11],b=zyNot,out=y11z);
+    Xor(a=ny,b=y11z,out=y11);
+    And(a=y[12],b=zyNot,out=y12z);
+    Xor(a=ny,b=y12z,out=y12);
+    And(a=y[13],b=zyNot,out=y13z);
+    Xor(a=ny,b=y13z,out=y13);
+    And(a=y[14],b=zyNot,out=y14z);
+    Xor(a=ny,b=y14z,out=y14);
+    And(a=y[15],b=zyNot,out=y15z);
+    Xor(a=ny,b=y15z,out=y15);
+    
+    FullAdderFull(a=x0,b=y0,c=false,f=notf,out=out0,carry=carry0);
+    FullAdderFull(a=x1,b=y1,c=carry0,f=notf,out=out1,carry=carry1);
+    FullAdderFull(a=x2,b=y2,c=carry1,f=notf,out=out2,carry=carry2);
+    FullAdderFull(a=x3,b=y3,c=carry2,f=notf,out=out3,carry=carry3);
+    FullAdderFull(a=x4,b=y4,c=carry3,f=notf,out=out4,carry=carry4);
+    FullAdderFull(a=x5,b=y5,c=carry4,f=notf,out=out5,carry=carry5);
+    FullAdderFull(a=x6,b=y6,c=carry5,f=notf,out=out6,carry=carry6);
+    FullAdderFull(a=x7,b=y7,c=carry6,f=notf,out=out7,carry=carry7);
+    FullAdderFull(a=x8,b=y8,c=carry7,f=notf,out=out8,carry=carry8);
+    FullAdderFull(a=x9,b=y9,c=carry8,f=notf,out=out9,carry=carry9);
+    FullAdderFull(a=x10,b=y10,c=carry9,f=notf,out=out10,carry=carry10);
+    FullAdderFull(a=x11,b=y11,c=carry10,f=notf,out=out11,carry=carry11);
+    FullAdderFull(a=x12,b=y12,c=carry11,f=notf,out=out12,carry=carry12);
+    FullAdderFull(a=x13,b=y13,c=carry12,f=notf,out=out13,carry=carry13);
+    FullAdderFull(a=x14,b=y14,c=carry13,f=notf,out=out14,carry=carry14);
+    FullAdderFull(a=x15,b=y15,c=carry14,f=notf,out=out15,carry=carry15);
+
+    Xor(a=no,b=out0,out=outB0);
+    Xor(a=no,b=out1,out=outB1);
+    Xor(a=no,b=out2,out=outB2);
+    Xor(a=no,b=out3,out=outB3);
+    Xor(a=no,b=out4,out=outB4);
+    Xor(a=no,b=out5,out=outB5);
+    Xor(a=no,b=out6,out=outB6);
+    Xor(a=no,b=out7,out=outB7);
+    Xor(a=no,b=out8,out=outB8);
+    Xor(a=no,b=out9,out=outB9);
+    Xor(a=no,b=out10,out=outB10);
+    Xor(a=no,b=out11,out=outB11);
+    Xor(a=no,b=out12,out=outB12);
+    Xor(a=no,b=out13,out=outB13);
+    Xor(a=no,b=out14,out=outB14);
+    Xor(a=no,b=out15,out=outB15);
+
+    Or16Way(a=outB0,b=outB1,c=outB2,d=outB3,
+            e=outB4,f=outB5,g=outB6,h=outB7,
+            i=outB8,j=outB9,k=outB10,l=outB11,
+            m=outB12,n=outB13,o=outB14,p=outB15,
+            out=orall);
+
+    Not(in=orall,out=zr);
+    Buffer(in=outB15,out=ng);
+
+    Buffer(in=outB0,out=out[0]);
+    Buffer(in=outB1,out=out[1]);
+    Buffer(in=outB2,out=out[2]);
+    Buffer(in=outB3,out=out[3]);
+    Buffer(in=outB4,out=out[4]);
+    Buffer(in=outB5,out=out[5]);
+    Buffer(in=outB6,out=out[6]);
+    Buffer(in=outB7,out=out[7]);
+    Buffer(in=outB8,out=out[8]);
+    Buffer(in=outB9,out=out[9]);
+    Buffer(in=outB10,out=out[10]);
+    Buffer(in=outB11,out=out[11]);
+    Buffer(in=outB12,out=out[12]);
+    Buffer(in=outB13,out=out[13]);
+    Buffer(in=outB14,out=out[14]);
+    Buffer(in=outB15,out=out[15]);
+}

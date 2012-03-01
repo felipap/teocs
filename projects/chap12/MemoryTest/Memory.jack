@@ -1,0 +1,80 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/12/Memory.jack
+
+/**
+ * Memory operations library.
+ 
+ heap location => 2048 to 16383;
+ 
+ */ 
+class Memory {
+
+	static Array memory;
+	static Array FreeList;
+	
+    /** Initializes memory parameters. */
+    function void init() {
+    	let memory = 0;
+    	let FreeList = 2048;
+    	let FreeList[0] = 16383-2048;
+    	let FreeList[1] = 0;
+    	return;	
+    }
+
+    /** Returns the value of the main memory at this address. */
+    function int peek(int address) {
+    	return memory[address];
+    }
+
+    /** Sets the value of the main memory at this address
+     *  to the given value. */
+    function void poke(int address, int value) {
+    	let memory[address] = value;
+    	return;
+    }
+
+    /** finds and allocates from the heap a memory block of the 
+     *  specified size and returns a reference to its base address. */
+    function int alloc(int size) {
+    	var Array actual, block;
+    	var int found, actual_size;
+    	
+    	let found = 0;
+    	let actual = FreeList;
+    	while (found=0) {
+    		if (actual[0]>(size+1)) { // success
+    			let found = 1;
+    		} else {
+    			if (actual[1]=0) {
+    				do Sys.error(5);
+    				return 0;
+    			} // erro
+    			let actual = actual[1];
+    		}
+    	}
+    	
+    	let actual_size = actual[0]-(size+1);
+    	if (actual_size < 30) {
+    		return actual+1; // return full block
+    	}
+    	let actual[0] = actual_size;
+    	let block = actual+actual_size;
+    	let block[0] = size+1;
+    	
+    	return block+1;
+    }
+
+    /** De-allocates the given object and frees its space. */
+    function void deAlloc(int object) {
+    	var Array obj_block;
+    	var int size;
+    	let obj_block = object-1;
+    	let size = obj_block[0];
+    	let obj_block[1] = FreeList[1];
+    	let FreeList[1] = obj_block;
+    	
+		return;
+    }
+}

@@ -1,0 +1,148 @@
+
+# inside foo.vm, inside function 'bar'
+label START
+    ...
+    if-goto START
+    goto END
+
+label END
+
+# label START
+(foo.bar.START) # (class.function.label)
+
+#if-goto START
+@SP
+M=M-1
+A=M
+D=M
+@foo.bar.START
+D;JNE
+
+# goto END
+@foo.bar.END
+0;JMP
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ 
+
+Process: 'call f n'
+// calling function f with k arguments
+      push return-address // (using label declared below)
+      push LCL // save LCL of the calling function
+      push ARG // save ARG of the calling function
+      push THIS // save ARG of the calling function
+      push THAT // save ARG of the calling function
+      ARG = SP-n-5 // reposition ARG (n=num of args)
+      LCL = SP // reposition LCL
+      goto f // transfer control
+(return address) // declare label for return-address
+
+# push XReg
+@XReg
+D=M
+@SP
+A=M
+M=D
+@SP
+M=M+1
+
+# ARG = SP-n-5
+@SP
+D=A
+@n-5
+D=D-A
+
+
+Process: 'function f k'
+// declare function f that has k local variables
+    (f) // declare label for function entry
+        repeat k times: // k = number of local variables
+            push 0 // initialize them all to 0
+
+#function f k
+(class.function)
+
+@R13
+M=k'
+(class.function._func_local_storage)
+
+##
+
+        Process: 'return'
+        // inside a function
+            FRAME = LCL // FRAME is a temporary variable
+            RET = *(FRAME-5) // put return-add in a temp. var.
+            *ARG = pop() // reposition the return value for the caller
+            SP = ARG+1 // restore SP of the caller
+            THAT = *(FRAME-1) // restore THAT of the caller
+            THIS = *(FRAME-2) // restore THIS of the caller
+            ARG = *(FRAME-3) // restore ARG of the caller
+            LCL = *(FRAME-4) // restore LCL of the caller
+            goto RET // goto return-add (in the caller's code)
+
+example of return code:
+// return
+# FRAME (R5) = LCL
+@LCL
+D=M
+@R5
+M=D
+
+# RET (R6) = *(FRAME-5)
+## D = FRAME-5
+@R5
+D=A
+@5
+D=D-A
+## R6 = return add
+A=D
+D=M
+@R6
+M=D
+
+# *(ARG) <- *(--SP)
+## --SP
+@SP
+M=M-1
+## D = *(--SP)
+A=M
+D=M
+## *(ARG) <- D
+@ARG
+A=M
+M=D
+
+# restore SP of the caller (SP = ARG+1)
+@ARG
+D=M
+@SP
+M=D+1
+
+# THAT = FRAME-1
+@R5
+D=M
+@1
+D=D-A
+@THAT
+M=D
+@R5
+D=M
+@2
+D=D-A
+@THIS
+A=D
+@R5
+D=M
+@3
+D=D-A
+@ARG
+A=D
+@R5
+D=M
+@4
+D=D-A
+@LCL
+A=D
+@R6
+A=M
+0;JMP
+

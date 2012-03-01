@@ -1,0 +1,112 @@
+pop pile index
+
+// decrement pointer address
+@PS
+M=M-1
+
+// get address of pile[index]
+@pile // a register
+D=A
+@index // an integer
+D=D+A
+
+// store @PS's M at pile[address]
+@PS
+A=M
+M=D
+
+#######################################
+
+push pile index
+
+// get address of pile[index]
+@pile
+D=A
+@index
+D=D+A
+
+// push Memory[D] to stack
+// get D to be value of pile[address]
+A=D
+D=M
+@PS
+A=M
+M=D
+
+// increment value of PS
+@PS
+M=M+1
+
+// if constant
+    // get constant to be value of pile[address]
+    @<constant>
+    D=A
+    @PS
+    M=D
+    
+    // increment value of PS
+    @PS
+    M=M+1
+
+###################################
+
+add
+
+@SP
+// @R13 == last stack value
+A=M
+D=M
+@R13
+M=D
+// @R14 == first before last stack value
+@SP
+A=M-1
+D=M
+@R14
+M=D
+// decrement SP by 1
+@SP
+M=M-1
+// add both values to D
+@R13
+D=M
+@R14
+D=M+D
+// store value to Memory[SP]
+@SP
+M=D
+
+###################################
+
+eq
+
+@R14
+D=M
+@R13
+D=D-M
+
+@gotoN
+D=A
+@R15
+M=D
+
+@toDeq1
+D;JEQ
+@toDeq0
+0;JMP
+
+(gotoN)
+// store value to Memory[SP]
+@SP
+M=D
+    
+
+add to the end of the files
+(toDeq1)
+    D=1
+    @R15
+    0;JMP        
+(toDeq0)
+    D=0
+    @R15
+    0;JMP

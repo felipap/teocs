@@ -1,0 +1,81 @@
+
+class Square {
+    
+    field int x, y;
+    field int size;
+    field int sleep;
+    
+    constructor Square new(int Sx, int Sy, int Ssize) {
+        let x = Sx;
+        let y = Sy;
+        let size = Ssize;
+        let sleep = 400;
+        
+        do draw();
+        return this;
+    }
+    
+    method void dispose() {
+        do Memory.deAlloc(this);
+        return;
+    }
+    
+    method void draw() {
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, x+size, y+size);
+        return;
+    }
+    
+    method void erase() {
+        do Screen.setColor(false);
+        do Screen.drawRectangle(x, y, x+size, y+size);
+        return;
+    }
+    
+    method void moveX(int incX) {
+        do erase();    
+        let x = x+incX;
+        do draw();
+        return;
+    }
+    
+    method void moveY(int incY) {
+        do erase();
+        let y = y+incY;
+        do draw();
+        return;
+    }
+    
+    method void incSize(int incSize) {
+        do erase();
+        let size = size+incSize;
+        do draw();
+        return;
+    }
+    
+    method int getSize() {
+        return size;
+    }
+    
+    method int getX() {
+        return x;
+    }
+    
+    method int getY() {
+        return y;
+    }
+    
+    method void wait() {
+        do Sys.wait(sleep);
+        return;
+    }
+    
+    method int getSleepTime() {
+        return sleep;
+    }
+    
+    method void setSleepTime(int new) {
+        let sleep = new;
+        return;
+    }
+}

@@ -1,0 +1,19 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Or.hdl
+
+/**
+ * And gate. out = a and b and c and d
+ */
+
+CHIP And4 {
+
+    IN  a, b, c, d;
+    OUT out;
+
+    PARTS:
+    And(a=a,b=b,out=or1);
+    And(a=c,b=d,out=or2);
+    And(a=or1,b=or2,out=out);
+}

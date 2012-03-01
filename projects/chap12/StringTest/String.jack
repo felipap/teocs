@@ -1,0 +1,142 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/12/String.jack
+
+/**
+ * The String type.
+ */
+class String {
+
+	field Array string;
+	field int maxsize, index;
+	
+    /** Constructs a new empty String with a maximum length of
+     *  maxLength. */
+    constructor String new(int maxLength) {
+    	let maxsize = maxLength+1;
+    	let string = Array.new(maxsize);
+    	let index = 0;
+    	return this;
+    }
+
+    /** De-allocates the string and frees its space. */
+    method void dispose() {
+    	do string.dispose();
+    	return;
+    }
+
+    /** Returns the current length of this String. */
+    method int length() {
+    	return index;
+    }
+
+    /** Returns the character at location j. */
+    method char charAt(int j) {
+    	return string[j];
+    }
+
+    /** Sets the j'th character of this string to be c. */
+    method void setCharAt(int j, char c) {
+    	let string[j] = c;
+    	return;
+    }
+
+    /** Appends the character c to the end of this String.
+     *  Returns this string as the return value. */
+    method String appendChar(char c) {
+    	let string[index] = c;
+    	let index = index+1;
+    	return this;
+    }
+
+    /** Erases the last character from this String. */
+    method void eraseLastChar() {
+    	if (index=0) { return; }
+    	let index = index-1;
+    	return;
+    }
+
+    /** Returns the integer value of this String until the first non
+     *  numeric character. */
+    method int _intValue() {
+    	var int v, i, d, length;
+    	
+    	let v = 0;
+    	let length = index;
+    	
+    	if (charAt(0)=45) {
+    		let i = 2;
+    	} else {
+    		let i = 1;
+    	}
+    	
+    	while(i<(length+1)) {
+    		let d = charAt(i-1)-48;
+    		let v = v*10+d;
+    		
+    		let i = i+1;
+    	}
+    	
+    	return v;
+    }
+    
+    method int intValue() {
+    	if (charAt(0)=45) {
+    		return -_intValue();
+    	} else {
+    		return _intValue();
+    	}
+    }
+	
+	function int modulo(int a, int b) {
+		return a-((a/b)*b);
+	}
+	
+    /** Sets this String to hold a representation of the given
+     *  number. */
+     
+    method void _setInt(int number, int thisindex) {
+    	
+    	var int last_digit, c;
+    	let last_digit = String.modulo(number, 10);
+    	let c = last_digit+48;
+    	    	
+    	if (number<10) {
+    		do appendChar(c);
+    	} else {
+    		do _setInt(number/10, thisindex+1);
+    		do appendChar(c);
+    		// do setCharAt(thisindex, c);
+    	}
+    	
+    	return;
+    }
+    
+    method void setInt(int number) {
+    	let index = 0;
+    	
+    	if (number < 0) {
+    		do appendChar(45);
+    		let number = -number;
+    	}
+    	
+    	do _setInt(number, 0);
+    	return;
+    }
+
+    /** Returns the new line character. */
+    function char newLine() {
+    	return 128;
+    }
+
+    /** Returns the backspace character. */
+    function char backSpace() {
+    	return 129;
+    }
+
+    /** Returns the double quote (") character. */
+    function char doubleQuote() {
+    	return 34;
+    }
+}

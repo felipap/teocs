@@ -1,0 +1,5 @@
+
+push constant 5
+push constant 9
+sub
+neg

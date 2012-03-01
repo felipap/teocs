@@ -1,0 +1,66 @@
+
+MODELO PARA ELEMENTOS DO CÓDIGO
+
+
+CompilationEngine API:
+
+attributes:
+# saves the value of the current subroutine being compiled
+- self.current_subr 
+
+#########################################
+
+Scope API:
+
+scope[var] accesses self.scope[var]
+
+attributes:
+-
+
+METHODS:
+# adds a var to a the scope
+- addVar(var_name, var_type, var_kind)
+
+# checks if a var_name is already defined in a scope
+- inScope(var_name)
+
+# returns a dictionary with info on the variable
+- getObject(var_name)
+
+# counts the number of entries where 'kind' == kind
+- countKind(kind)
+
+########################################
+
+VMSymbolTable API:
+
+vmsymboltable['scopename'] returns dict of variable
+
+attributes
+# 'O
+- self.classname
+# the class scope
+- self.parent
+
+METHODS:
+# creates subroutine scope
+- createScope(subr_name, subr_type)
+
+# check if a subr scope already exists
+- scopeExists(subr_name)
+
+# returns the subr scope
+- getScope(subr_name)
+
+# access the class scope
+- getClassScope()
+
+# checks if a variable is accessible in a scope
+- isAccessible(subr_name, var_name)
+
+# returns a variable address in the form (<pile>, <index>)
+- getAddress(subr_name, var_name)
+
+# returns the variable info (if not accessible, raises error)
+- getVar(subr_name, var_name)
+

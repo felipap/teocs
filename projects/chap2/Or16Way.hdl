@@ -1,0 +1,34 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Or.hdl
+
+/**
+ * Or gate: out = a and b.
+ */
+
+CHIP Or16Way {
+
+    IN  a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p;
+    OUT out;
+
+    PARTS:
+    Or(a=a,b=b,out=out0);
+    Or(a=c,b=d,out=out1);
+    Or(a=e,b=f,out=out2);
+    Or(a=g,b=h,out=out3);
+    Or(a=i,b=j,out=out4);
+    Or(a=k,b=l,out=out5);
+    Or(a=m,b=n,out=out6);
+    Or(a=o,b=p,out=out7);
+
+    Or(a=out0,b=out1,out=out2at0);
+    Or(a=out2,b=out3,out=out2at2);
+    Or(a=out4,b=out5,out=out2at4);
+    Or(a=out6,b=out7,out=out2at6);
+
+    Or(a=out2at0,b=out2at2,out=out2at2at0);
+    Or(a=out2at4,b=out2at6,out=out2at2at2);
+
+    Or(a=out2at2at0,b=out2at2at2,out=out);
+}

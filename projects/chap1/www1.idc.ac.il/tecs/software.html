@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD>
+<TITLE>The Elements of Computing Systems / Nisan &amp; Schocken
+ / www.idc.ac.il/tecs</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf8"/>
+<LINK REL="StyleSheet" href="tecs.css" type="text/css"/>
+<SCRIPT TYPE="text/javascript" SRC="tecs.js"></SCRIPT>
+</HEAD>
+<BODY>
+<SCRIPT TYPE="text/javascript">drawMenu(3);</SCRIPT>
+<H1>Software</H1>
+<P>The book's software (also known as the <EM>TECS software suite</EM>)
+contains all the tools necessary to complete all the projects described in
+the book. This section describes this software and gives links for downloading
+it to your computer.</P>
+<P><b>Compatibility:</b> The book's software can run as is on both Windows and Unix.</P>
+<DL>
+	<DT>Terms of use:<span style="font-weight: 400"> The book's software can be used freely and is protected by
+    the <A HREF="http://www.gnu.org/copyleft/gpl.html">GNU GPL (General Public License)</A>.</span></DT>
+	<DT>&nbsp;</DT>
+	<DT>Tutorials: <span style="font-weight: 400">Each software tool is accompanied by a detailed tutorial, available in the <A HREF="plan.html">Study Plan section of this site</A>.</span></DT>
+</DL>
+<p><b>Source code:</b> is available. If you wish to inspect/modify/extend 
+	the source code, you can download it <A HREF="#source">below</A>.</p>
+<P><A HREF="software/tecs-software-suite-2.5.zip">Download
+the book's software</A> Version 2.5 (400K).
+After downloading, put this zip file in an empty directory on your computer
+and extract its contents as is, without changing the directories structure.
+<EM>In order to use our software tools, your computer must be equipped with a
+Java Run-time Environment, version 1.3.1 or later</EM>. The JRE, also called J2RE,
+can be downloaded freely from many sites including
+<A HREF="http://www.javasoft.com/">http://www.javasoft.com/</A>. For best
+performance, download the latest available version.</P>
+<DL>
+<DT>Having any problems with our software?</DT>
+<DD>Please consult our <A HREF="help.html">Help page</A>.</DD>
+</DL>
+<H2>About the Software</H2>
+<P>Below are brief descriptions and screen shots of the tools contained in the
+book's software suite.</P>
+<TABLE CELLPADDING=6>
+<TR CLASS="even">
+    <TH CLASS="topleft">Hardware Simulator</TH>
+    <TD>Simulates and tests gates and chips implemented in HDL (Hardware
+        Description Language). Used to construct hardware projects.<p>Hardware Simulator 
+	Tutorial: <A HREF="tutorials/hardware-simulator.pps"><IMG ALIGN="ABSMIDDLE" SRC="icons/powerpoint.gif" ALT="PowerPoint Format" width="16" height="16"/></A> <A HREF="tutorials/hardware-simulator.pdf"><IMG ALIGN="ABSMIDDLE" SRC="icons/acrobat.gif" ALT="Portable Document Format" width="16" height="16"/></A></TD>
+	<TD ALIGN="CENTER" CLASS="topright">
+		Sample screenshots:
+		<TABLE WIDTH="100%" STYLE="text-align:center"><TR>
+		<TD WIDTH="33%"><A HREF="screenshots/fig1.7.gif"><IMG SRC="screenshots/fig1.7-thumb.gif" CLASS="screenshot" width="99" height="72"/></A></TD>
+		<TD WIDTH="34%"><A HREF="screenshots/figB.2.gif"><IMG SRC="screenshots/figB.2-thumb.gif" CLASS="screenshot" width="100" height="72"/></A></TD>
+		<TD WIDTH="33%"><A HREF="screenshots/fig5.11.gif"><IMG SRC="screenshots/fig5.11-thumb.gif" CLASS="screenshot" width="100" height="72"/></A></TD>
+	</TR><TR>
+		<TD><A HREF="screenshots/fig1.7.gif">Simulating a Xor gate</A></TD>
+		<TD><A HREF="screenshots/figB.2.gif">Running a test script</A></TD>
+		<TD><A HREF="screenshots/fig5.11.gif">Simulating the topmost Computer chip</A></TD>
+	</TR></TABLE></TD>
+</TR>
+<TR CLASS="odd">
+    <TH>CPU Emulator</TH>
+    <TD>Emulates the computer platform built in the course.
+        Used to test and run programs written in either machine language or
+        assembly.<p>CPU Emulator Tutorial: <A HREF="tutorials/cpu-emulator.pps"><IMG ALIGN="ABSMIDDLE" SRC="icons/powerpoint.gif" ALT="PowerPoint Format" width="16" height="16"/></A> <A HREF="tutorials/cpu-emulator.pdf"><IMG ALIGN="ABSMIDDLE" SRC="icons/acrobat.gif" ALT="Portable Document Format" width="16" height="16"/></A></TD>
+	<TD ALIGN="CENTER">
+		Sample screenshot:
+		<TABLE WIDTH="100%" STYLE="text-align:center"><TR>
+		<TD><A HREF="screenshots/slide4.gif"><IMG SRC="screenshots/slide4-thumb.gif" CLASS="screenshot" width="100" height="72"/></A></TD>
+	</TR><TR>
+		<TD><A HREF="screenshots/slide4.gif">Running a program that draws a rectangle on the computer screen</A></TD>
+	</TR></TABLE></TD>
+</TR>
+<TR CLASS="even">
+    <TH>VM Emulator</TH>
+    <TD>Emulates a typical stack-based virtual machine.
+        Used to run and test programs written in the VM language.<p>VM Emulator 
+	Tutorial: <A HREF="tutorials/vm-emulator.pps"><IMG ALIGN="ABSMIDDLE" SRC="icons/powerpoint.gif" ALT="PowerPoint Format" width="16" height="16"/></A> <A HREF="tutorials/vm-emulator.pdf"><IMG ALIGN="ABSMIDDLE" SRC="icons/acrobat.gif" ALT="Portable Document Format" width="16" height="16"/></A></TD>
+	<TD ALIGN="CENTER">
+		Sample screenshot:
+		<TABLE WIDTH="100%" STYLE="text-align:center"><TR>
+		<TD><A HREF="screenshots/fig7.15.gif"><IMG SRC="screenshots/fig7.15-thumb.gif" CLASS="screenshot" width="100" height="72"/></A></TD>
+	</TR><TR>
+		<TD><A HREF="screenshots/fig7.15.gif">Running a simple program</A></TD>
+	</TR></TABLE></TD>
+</TR>
+<TR CLASS="odd">
+    <TH>Assembler</TH>
+    <TD>Translates programs from assembly language to machine language. The
+        resulting code can be executed directly on the Computer chip (in
+        the hardware simulator), or emulated on the CPU emulator (which is much
+        quicker).<p>Assembler Tutorial: <A HREF="tutorials/assembler.pps"><IMG ALIGN="ABSMIDDLE" SRC="icons/powerpoint.gif" ALT="PowerPoint Format" width="16" height="16"/></A> <A HREF="tutorials/assembler.pdf"><IMG ALIGN="ABSMIDDLE" SRC="icons/acrobat.gif" ALT="Portable Document Format" width="16" height="16"/></A></TD>
+	<TD ALIGN="CENTER">
+		Sample screenshots:
+		<TABLE WIDTH="100%" STYLE="text-align:center"><TR>
+		<TD WIDTH="50%"><A HREF="screenshots/fig4.7.gif"><IMG SRC="screenshots/fig4.7-thumb.gif" CLASS="screenshot" width="100" height="72"/></A></TD>
+		<TD WIDTH="50%"><A HREF="screenshots/fig6.3.gif"><IMG SRC="screenshots/fig6.3-thumb.gif" CLASS="screenshot" width="100" height="72"/></A></TD>
+	</TR><TR>
+		<TD><A HREF="screenshots/fig4.7.gif">Assembling</A></TD>
+		<TD><A HREF="screenshots/fig6.3.gif">Using a compare file</A></TD>
+	</TR></TABLE></TD>
+</TR>
+<!-- <TR CLASS="">
+    <TH>VM Translator (not contained in the software suite but rather built
+	during the course)</TH>
+    <TD>A virtual machine implementation (modeled after Java's JVM).
+        Translates programs written in the VM language into programs written in
+        assembly language.</TD>
+	<TD ALIGN="CENTER">No sample screenshots available<BR/>(This is not a graphical application)</TD>
+</TR> -->
+<TR CLASS="even">
+    <TH>Compiler</TH>
+    <TD>Translates from Jack (a simple Java-like language described in
+        Chapter 9) into VM code. The resulting code can run on the VM emulator,
+        or translated further by the VM translator + assembler into binary code
+        that can run on the hardware simulator or on the CPU emulator.</TD>
+	<TD ALIGN="CENTER">No sample screenshots available<BR/>(This is not a graphical application)</TD>
+</DD>
+<TR CLASS="odd">
+    <TH>Operating system</TH>
+    <TD>A collection of libraries supporting math, I/O, graphics, string,
+        memory management, etc.</TD>
+	<TD ALIGN="CENTER">
+		Sample screenshots:
+		<TABLE WIDTH="100%" STYLE="text-align:center"><TR>
+		<TD><A HREF="screenshots/fig9.11.gif"><IMG SRC="screenshots/fig9.11-thumb.gif" CLASS="screenshot" width="100" height="72"/></A></TD>
+	</TR><TR>
+		<TD><A HREF="screenshots/fig9.11.gif">Some programs using the OS, running on the computer built in the course</A></TD>
+	</TR></TABLE></TD>
+</TR>
+<TR CLASS="even">
+    <TH CLASS="bottomleft">Text Comparer</TH>
+    <TD>Checks if two input text files are identical. Used in various projects.
+        This tool is only available for Windows; on Unix use "diff".</TD>
+	<TD ALIGN="CENTER" CLASS="bottomright">No sample screenshots available<BR/>(This is not a graphical application)</TD>
+</TR>
+</TABLE>
+<A NAME="source"></A><H2>Source Code</H2>
+<P>If you wish to inspect, modify, or extend the book's software, you can
+<A HREF="software/tecs-open-source-2.5.zip">download its source code</A>
+Version 2.5 (500K)</P>
+<P>Before compiling the source code on your computer, read this
+<A HREF="software/Readme.txt">Readme.txt</A> file. You will need a Java compiler such
+as the one found in the JDK (Java Development Kit) which can be downloaded
+freely from many sites including <A HREF="http://www.javasoft.com/">http://www.javasoft.com/</A>.</P>
+<P>For details on what's new in the current version of the software (somewhat
+technical but useful for porting old modifications to the current version),
+read this <A HREF="software/ChangeLog.txt">ChangeLog.txt</A> file.</P>
+<P>If you wish to share your software extensions with others, please
+<A HREF="mailto:tecs.ta@gmail.com">contact us</A>. We'll be glad to put a 
+link to it from here.</P>
+<!--<DL>
+<DT>Relevant reading for developers:</DT>
+<DD><A HREF="book/chapter13.pdf">More Fun to Go</A> (chapter 13 in the book).</DD>
+</DL>-->
+<H2>Additional Software</H2>
+<P>The software listed below is not included in the software suite and is <EM>unsupported</EM> by us. If you have written some software which may be useful to
+other visitors of this site, please <A HREF="mailto:tecs.ta@gmail.com">let us know</A>. We'll be glad to add it to this list.</P>
+<TABLE CELLPADDING=6 STYLE="border-spacing:2 0">
+<TR CLASS="even">
+<TH CLASS="topleft"></TD>
+<TD ROWSPAN=3>Helps editing and debugging programs in the Jack language.
+It is based on a commercial tool called Edit Plus which can be used freely
+for 30 days, requiring a $30 payment later.
+<P>Jack IDE tutorial : <A HREF="tutorials/jack-ide.pps"><IMG ALIGN="ABSMIDDLE" SRC="icons/powerpoint.gif" ALT="PowerPoint Format" width="16" height="16"/></A> <A HREF="tutorials/jack-ide.pdf"><IMG ALIGN="ABSMIDDLE" SRC="icons/acrobat.gif" ALT="Portable Document Format" width="16" height="16"/></A></TD>
+<TD CLASS="topright"></A></TH>
+</TR>
+<TR CLASS="even">
+<TH STYLE='white-space:nowrap'>A Jack IDE</TD>
+<TD><A HREF="software/JACK_IDE_SETUP.msi">Download</A></TH>
+</TR>
+<TR CLASS="even">
+<TH CLASS="bottomleft"></TD>
+<TD CLASS="bottomright"></TH>
+</TR>
+</TABLE>
+<SCRIPT TYPE="text/javascript">drawMenu(3);</SCRIPT>
+<P ALIGN="CENTER" STYLE="font-size:smaller">Site design &amp; construction by <A HREF="http://users.actcom.co.il/typographics/yannai/">Yannai A. Gonczarowski</A></P>
+<DIV ALIGN="RIGHT">
+<!-- Site Meter -->
+<script type="text/javascript" src="http://s28.sitemeter.com/js/counter.js?site=s28tecsbook">
+</script>
+<noscript>
+<a href="http://s28.sitemeter.com/stats.asp?site=s28tecsbook" target="_top">
+<img src="http://s28.sitemeter.com/meter.asp?site=s28tecsbook" alt="Site Meter" border="0"/></a>
+</noscript>
+<!-- Copyright (c)2006 Site Meter -->
+</DIV>
+</BODY></HTML>

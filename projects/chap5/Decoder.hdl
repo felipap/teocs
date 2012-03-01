@@ -1,0 +1,25 @@
+
+CHIP Decoder {
+    IN Ins[16];
+    OUT i, a, c1, c2, c3, c4, c5, c6, d1, d2, d3, j1, j2, j3;
+
+    PARTS:
+
+    Buffer(in=Ins[15], out=i);
+    Buffer(in=Ins[12], out=a);
+
+    Buffer(in=Ins[11], out=c1);
+    Buffer(in=Ins[10], out=c2);
+    Buffer(in=Ins[9], out=c3);
+    Buffer(in=Ins[8], out=c4);
+    Buffer(in=Ins[7], out=c5);
+    Buffer(in=Ins[6], out=c6);
+
+    Buffer(in=Ins[5], out=d1);
+    Buffer(in=Ins[4], out=d2);
+    Buffer(in=Ins[3], out=d3);
+
+    Buffer(in=Ins[2], out=j1);
+    Buffer(in=Ins[1], out=j2);
+    Buffer(in=Ins[0], out=j3);
+}

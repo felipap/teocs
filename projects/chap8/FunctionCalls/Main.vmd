@@ -1,0 +1,18 @@
+
+function Main.add42 1
+
+    push argument 0
+    push constant 5
+    gt
+
+    if-goto ENDIT
+    
+        push constant 1
+        pop local 0
+        return
+
+    
+    label ENDIT
+        push constant 0
+        pop local 0
+        return

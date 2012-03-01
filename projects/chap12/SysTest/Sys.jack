@@ -1,0 +1,54 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/12/Sys.jack
+
+/**
+ * A basic system services library.
+ */
+class Sys {
+
+    /** Makes all required initializations. */
+    function void init() {
+    	do Memory.init();
+    	do Keyboard.init();
+    	do Math.init();
+    	do Output.init();
+    	do Screen.init();
+    	
+    	do Main.main();
+    	do Sys.halt();
+    	return;
+    }
+
+    /** Halts the execution. */
+    function void halt() {
+    	while (1=1) { }
+    	return;
+    }
+
+    /** Waits approximately duration milliseconds before it returns. */
+    function void wait(int duration) {
+    	var int count;
+    	let count = 0;
+    	while (count < duration+1) { let count = count+1; }
+    	return;
+    }
+
+    /** prints the given error code in the form "ERR<errorCode>",
+     *  and halts. */
+    function void error(int errorCode) {
+    	if (errorCode=1) { do Output.printString("Duration must be positive"); }
+		if (errorCode=2) { do Output.printString("Array size must be positive"); }
+		if (errorCode=3) { do Output.printString("Division by zero"); }
+		if (errorCode=4) { do Output.printString("Cannot compute square root of a negative number"); }
+		if (errorCode=5) { do Output.printString("Allocated memory size must be positive"); }
+		if (errorCode=6) { do Output.printString("Heap overflow"); }
+		if (errorCode=7) { do Output.printString("Illegal pixel coordinates"); }
+		if (errorCode=8) { do Output.printString("Illegal line coordinates"); }
+		if (errorCode=9) { do Output.printString("Illegal rectangle coordinates"); }
+		if (errorCode=12) { do Output.printString("Illegal center coordinates"); }
+
+		return;
+    }
+}

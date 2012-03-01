@@ -1,0 +1,33 @@
+body {
+	font-family: arial;
+	background-color: #fafaff;
+	color: #000040;
+}
+TR.even { background-color: #bbbbff; }
+TR.odd { }
+A:visited { color: #000080; }
+A:link { color: #0000c0; }
+A:hover { color: #0000ff; }
+.topleft {
+	background-image: url(icons/topleft.gif);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+.topright {
+	background-image: url(icons/topright.gif);
+	background-repeat: no-repeat;
+	background-position: top right;
+}
+.bottomleft {
+	background-image: url(icons/bottomleft.gif);
+	background-repeat: no-repeat;
+	background-position: bottom left;
+}
+.bottomright {
+	background-image: url(icons/bottomright.gif);
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+dt { font-weight: bold; }
+em { font-weight: bold; }
+img.screenshot { width:100; height:72 }

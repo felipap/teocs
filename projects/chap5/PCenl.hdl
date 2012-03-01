@@ -1,0 +1,20 @@
+
+
+CHIP PCenl {
+    IN j1, j2, j3, ng, zr;
+    OUT load;
+
+    PARTS:
+    And(a=j1, b=ng, out=r1);
+    And(a=j2, b=zr, out=r2);
+
+    Not(in=ng, out=Nng);
+    Not(in=zr, out=Nzr);
+    And(a=Nng, b=Nzr, out=pos);
+
+    And(a=j3, b=pos, out=r3);
+
+    Or(a=r1, b=r2, out=r12);
+    Or(a=r12, b=r3, out=load);
+
+}

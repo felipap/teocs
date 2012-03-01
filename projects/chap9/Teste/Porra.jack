@@ -1,0 +1,15 @@
+
+class Porra {
+
+    field int ratio;
+    
+    constructor Porra new(int k) {
+        let ratio = k;
+        return this;
+    }    
+    
+    method int Multiplicate(int a) {
+        return ratio*a;
+    }
+          
+}

@@ -1,0 +1,49 @@
+
+
+class Main {
+    function void main() {
+        var int ratio;
+        var Porra porrinha;
+        var Square quadrado;
+        var int last, K, lastlast;
+       
+        let ratio = 3;
+        let porrinha = Porra.new(ratio);
+        let quadrado = Square.new(0, 0, 10);
+        
+        let K = 132;
+        let last = K;
+        while (0=0) {
+            let lastlast = last;
+            let K = Keyboard.keyPressed();
+            if ((K=70)|(K=130)|(K=131)|(K=132)|(K=133)) {
+                let last = K;
+            }
+            
+            if (last=130) { 
+                if (quadrado.getX()>1) { do quadrado.moveX(-4); }
+            }
+            if (last=131) { 
+                if (quadrado.getY()>1) { do quadrado.moveY(-4); }
+            }
+            if (last=132) { 
+                if (quadrado.getX()<(512-4-quadrado.getSize())) { 
+                    do quadrado.moveX(4);
+                }
+            }
+            if (last=133) { 
+                if (quadrado.getY()<(256-4-quadrado.getSize())) { 
+                    do quadrado.moveY(4);
+                }
+            }
+            
+            if ((last=70)|(~(last=lastlast))) {
+                    do quadrado.setSleepTime(100);
+            }
+            do quadrado.wait();
+        }
+        
+        return;
+    }
+
+}

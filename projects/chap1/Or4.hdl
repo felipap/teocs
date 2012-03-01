@@ -1,0 +1,19 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Or.hdl
+
+/**
+ * Or4 gate. out = a or b or c or d
+ */
+
+CHIP Or4 {
+
+    IN  a, b, c, d;
+    OUT out;
+
+    PARTS:
+    Or(a=a,b=b,out=or1);
+    Or(a=c,b=d,out=or2);
+    Or(a=or1,b=or2,out=out);
+}

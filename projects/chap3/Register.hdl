@@ -1,0 +1,52 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/03/1/Register.hdl
+
+/**
+ * 16-Bit register. 
+ * If load[t-1]=1 then out[t] = in[t-1]
+ * else out does not change (out[t] = out[t-1])
+ */
+
+CHIP Register {
+
+    IN  in[16], load;
+    OUT out[16];
+
+    PARTS:
+
+    Mux(a=loop0,b=in[0],sel=load,out=indff0);
+    Mux(a=loop1,b=in[1],sel=load,out=indff1);
+    Mux(a=loop2,b=in[2],sel=load,out=indff2);
+    Mux(a=loop3,b=in[3],sel=load,out=indff3);
+    Mux(a=loop4,b=in[4],sel=load,out=indff4);
+    Mux(a=loop5,b=in[5],sel=load,out=indff5);
+    Mux(a=loop6,b=in[6],sel=load,out=indff6);
+    Mux(a=loop7,b=in[7],sel=load,out=indff7);
+    Mux(a=loop8,b=in[8],sel=load,out=indff8);
+    Mux(a=loop9,b=in[9],sel=load,out=indff9);
+    Mux(a=loop10,b=in[10],sel=load,out=indff10);
+    Mux(a=loop11,b=in[11],sel=load,out=indff11);
+    Mux(a=loop12,b=in[12],sel=load,out=indff12);
+    Mux(a=loop13,b=in[13],sel=load,out=indff13);
+    Mux(a=loop14,b=in[14],sel=load,out=indff14);
+    Mux(a=loop15,b=in[15],sel=load,out=indff15);
+
+    DFF(in=indff0,out=loop0,out=out[0]);
+    DFF(in=indff1,out=loop1,out=out[1]);
+    DFF(in=indff2,out=loop2,out=out[2]);
+    DFF(in=indff3,out=loop3,out=out[3]);
+    DFF(in=indff4,out=loop4,out=out[4]);
+    DFF(in=indff5,out=loop5,out=out[5]);
+    DFF(in=indff6,out=loop6,out=out[6]);
+    DFF(in=indff7,out=loop7,out=out[7]);
+    DFF(in=indff8,out=loop8,out=out[8]);
+    DFF(in=indff9,out=loop9,out=out[9]);
+    DFF(in=indff10,out=loop10,out=out[10]);
+    DFF(in=indff11,out=loop11,out=out[11]);
+    DFF(in=indff12,out=loop12,out=out[12]);
+    DFF(in=indff13,out=loop13,out=out[13]);
+    DFF(in=indff14,out=loop14,out=out[14]);
+    DFF(in=indff15,out=loop15,out=out[15]);
+}

@@ -1,0 +1,128 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Mux4Way16.hdl
+
+/**
+ * 4-way 16-bit multiplexor.  
+ * out = a -- if sel=00
+ *       b -- if sel=01
+ *       c -- if sel=10
+ *       d -- if sel=11
+ */
+
+CHIP Mux4Way16 {
+     
+    IN a[16], b[16], c[16], d[16], sel[2];
+    OUT out[16];
+
+    PARTS:
+    
+    // This part manages the enable lines
+    Not(in=sel[0],out=notsel0);
+    Not(in=sel[1],out=notsel1);
+    
+    And(a=notsel1,b=notsel0,out=enA);
+    And(a=notsel1,b=sel[0],out=enB);
+    And(a=sel[1],b=notsel0,out=enC);
+    And(a=sel[1],b=sel[0],out=enD);
+    // END of enable lines management
+    
+	And(a=enA,b=a[0],out=aAT0);
+	And(a=enB,b=b[0],out=bAT0);
+	And(a=enC,b=c[0],out=cAT0);
+	And(a=enD,b=d[0],out=dAT0);
+	
+	And(a=enA,b=a[1],out=aAT1);
+	And(a=enB,b=b[1],out=bAT1);
+	And(a=enC,b=c[1],out=cAT1);
+	And(a=enD,b=d[1],out=dAT1);
+	
+	And(a=enA,b=a[2],out=aAT2);
+	And(a=enB,b=b[2],out=bAT2);
+	And(a=enC,b=c[2],out=cAT2);
+	And(a=enD,b=d[2],out=dAT2);
+	
+	And(a=enA,b=a[3],out=aAT3);
+	And(a=enB,b=b[3],out=bAT3);
+	And(a=enC,b=c[3],out=cAT3);
+	And(a=enD,b=d[3],out=dAT3);
+	
+	And(a=enA,b=a[4],out=aAT4);
+	And(a=enB,b=b[4],out=bAT4);
+	And(a=enC,b=c[4],out=cAT4);
+	And(a=enD,b=d[4],out=dAT4);
+	
+	And(a=enA,b=a[5],out=aAT5);
+	And(a=enB,b=b[5],out=bAT5);
+	And(a=enC,b=c[5],out=cAT5);
+	And(a=enD,b=d[5],out=dAT5);
+	
+	And(a=enA,b=a[6],out=aAT6);
+	And(a=enB,b=b[6],out=bAT6);
+	And(a=enC,b=c[6],out=cAT6);
+	And(a=enD,b=d[6],out=dAT6);
+	
+	And(a=enA,b=a[7],out=aAT7);
+	And(a=enB,b=b[7],out=bAT7);
+	And(a=enC,b=c[7],out=cAT7);
+	And(a=enD,b=d[7],out=dAT7);
+	
+	And(a=enA,b=a[8],out=aAT8);
+	And(a=enB,b=b[8],out=bAT8);
+	And(a=enC,b=c[8],out=cAT8);
+	And(a=enD,b=d[8],out=dAT8);
+	
+	And(a=enA,b=a[9],out=aAT9);
+	And(a=enB,b=b[9],out=bAT9);
+	And(a=enC,b=c[9],out=cAT9);
+	And(a=enD,b=d[9],out=dAT9);
+	
+	And(a=enA,b=a[10],out=aAT10);
+	And(a=enB,b=b[10],out=bAT10);
+	And(a=enC,b=c[10],out=cAT10);
+	And(a=enD,b=d[10],out=dAT10);
+	
+	And(a=enA,b=a[11],out=aAT11);
+	And(a=enB,b=b[11],out=bAT11);
+	And(a=enC,b=c[11],out=cAT11);
+	And(a=enD,b=d[11],out=dAT11);
+	
+	And(a=enA,b=a[12],out=aAT12);
+	And(a=enB,b=b[12],out=bAT12);
+	And(a=enC,b=c[12],out=cAT12);
+	And(a=enD,b=d[12],out=dAT12);
+	
+	And(a=enA,b=a[13],out=aAT13);
+	And(a=enB,b=b[13],out=bAT13);
+	And(a=enC,b=c[13],out=cAT13);
+	And(a=enD,b=d[13],out=dAT13);
+	
+	And(a=enA,b=a[14],out=aAT14);
+	And(a=enB,b=b[14],out=bAT14);
+	And(a=enC,b=c[14],out=cAT14);
+	And(a=enD,b=d[14],out=dAT14);
+	
+	And(a=enA,b=a[15],out=aAT15);
+	And(a=enB,b=b[15],out=bAT15);
+	And(a=enC,b=c[15],out=cAT15);
+	And(a=enD,b=d[15],out=dAT15);
+
+    Or4(a=aAT0,b=bAT0,c=cAT0,d=dAT0,out=out[0]);
+    Or4(a=aAT1,b=bAT1,c=cAT1,d=dAT1,out=out[1]);
+    Or4(a=aAT2,b=bAT2,c=cAT2,d=dAT2,out=out[2]);
+    Or4(a=aAT3,b=bAT3,c=cAT3,d=dAT3,out=out[3]);
+    Or4(a=aAT4,b=bAT4,c=cAT4,d=dAT4,out=out[4]);
+    Or4(a=aAT5,b=bAT5,c=cAT5,d=dAT5,out=out[5]);
+    Or4(a=aAT6,b=bAT6,c=cAT6,d=dAT6,out=out[6]);
+    Or4(a=aAT7,b=bAT7,c=cAT7,d=dAT7,out=out[7]);
+    Or4(a=aAT8,b=bAT8,c=cAT8,d=dAT8,out=out[8]);
+    Or4(a=aAT9,b=bAT9,c=cAT9,d=dAT9,out=out[9]);
+    Or4(a=aAT10,b=bAT10,c=cAT10,d=dAT10,out=out[10]);
+    Or4(a=aAT11,b=bAT11,c=cAT11,d=dAT11,out=out[11]);
+    Or4(a=aAT12,b=bAT12,c=cAT12,d=dAT12,out=out[12]);
+    Or4(a=aAT13,b=bAT13,c=cAT13,d=dAT13,out=out[13]);
+    Or4(a=aAT14,b=bAT14,c=cAT14,d=dAT14,out=out[14]);
+    Or4(a=aAT15,b=bAT15,c=cAT15,d=dAT15,out=out[15]);
+	
+}

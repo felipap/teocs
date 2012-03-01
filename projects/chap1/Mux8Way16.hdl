@@ -1,0 +1,200 @@
+// This file is part of the materials accompanying the book 
+// "The Elements of Computing Systems" by Nisan and Schocken, 
+// MIT Press. Book site: www.idc.ac.il/tecs
+// File name: projects/01/Mux8Way16.hdl
+
+/**
+ * 8-way 16-bit multiplexor.  
+ * out = a -- if sel=000
+ *       b -- if sel=001
+ *       ...
+ *       h -- if sel=111
+ */
+ 
+CHIP Mux8Way16 {
+
+    IN  a[16], b[16], c[16], d[16],
+        e[16], f[16], g[16], h[16],
+        sel[3];
+
+    OUT out[16];
+
+    PARTS: 
+
+    // This part manages the enable lines
+    Not(in=sel[0],out=notsel0);
+    Not(in=sel[1],out=notsel1);
+    Not(in=sel[2],out=notsel2);
+    
+	And4(a=notsel2,b=notsel1,c=notsel0,out=enA);
+	And4(a=notsel2,b=sel[1],c=notsel0,out=enC);
+	And4(a=notsel2,b=notsel1,c=sel[0],out=enB);
+	And4(a=sel[2],b=notsel1,c=notsel0,out=enE);
+	And4(a=notsel2,b=sel[1],c=sel[0],out=enD);
+	And4(a=sel[2],b=sel[1],c=notsel0,out=enG);
+	And4(a=sel[2],b=notsel1,c=sel[0],out=enF);
+	And4(a=sel[2],b=sel[1],c=sel[0],out=enH);
+    
+    // END of enable lines management
+    
+	And(a=enA,b=a[0],out=aAT0);
+	And(a=enB,b=b[0],out=bAT0);
+	And(a=enC,b=c[0],out=cAT0);
+	And(a=enD,b=d[0],out=dAT0);
+	And(a=enE,b=e[0],out=eAT0);
+	And(a=enF,b=f[0],out=fAT0);
+	And(a=enG,b=g[0],out=gAT0);
+	And(a=enH,b=h[0],out=hAT0);
+
+	And(a=enA,b=a[1],out=aAT1);
+	And(a=enB,b=b[1],out=bAT1);
+	And(a=enC,b=c[1],out=cAT1);
+	And(a=enD,b=d[1],out=dAT1);
+	And(a=enE,b=e[1],out=eAT1);
+	And(a=enF,b=f[1],out=fAT1);
+	And(a=enG,b=g[1],out=gAT1);
+	And(a=enH,b=h[1],out=hAT1);
+
+	And(a=enA,b=a[2],out=aAT2);
+	And(a=enB,b=b[2],out=bAT2);
+	And(a=enC,b=c[2],out=cAT2);
+	And(a=enD,b=d[2],out=dAT2);
+	And(a=enE,b=e[2],out=eAT2);
+	And(a=enF,b=f[2],out=fAT2);
+	And(a=enG,b=g[2],out=gAT2);
+	And(a=enH,b=h[2],out=hAT2);
+
+	And(a=enA,b=a[3],out=aAT3);
+	And(a=enB,b=b[3],out=bAT3);
+	And(a=enC,b=c[3],out=cAT3);
+	And(a=enD,b=d[3],out=dAT3);
+	And(a=enE,b=e[3],out=eAT3);
+	And(a=enF,b=f[3],out=fAT3);
+	And(a=enG,b=g[3],out=gAT3);
+	And(a=enH,b=h[3],out=hAT3);
+
+	And(a=enA,b=a[4],out=aAT4);
+	And(a=enB,b=b[4],out=bAT4);
+	And(a=enC,b=c[4],out=cAT4);
+	And(a=enD,b=d[4],out=dAT4);
+	And(a=enE,b=e[4],out=eAT4);
+	And(a=enF,b=f[4],out=fAT4);
+	And(a=enG,b=g[4],out=gAT4);
+	And(a=enH,b=h[4],out=hAT4);
+
+	And(a=enA,b=a[5],out=aAT5);
+	And(a=enB,b=b[5],out=bAT5);
+	And(a=enC,b=c[5],out=cAT5);
+	And(a=enD,b=d[5],out=dAT5);
+	And(a=enE,b=e[5],out=eAT5);
+	And(a=enF,b=f[5],out=fAT5);
+	And(a=enG,b=g[5],out=gAT5);
+	And(a=enH,b=h[5],out=hAT5);
+
+	And(a=enA,b=a[6],out=aAT6);
+	And(a=enB,b=b[6],out=bAT6);
+	And(a=enC,b=c[6],out=cAT6);
+	And(a=enD,b=d[6],out=dAT6);
+	And(a=enE,b=e[6],out=eAT6);
+	And(a=enF,b=f[6],out=fAT6);
+	And(a=enG,b=g[6],out=gAT6);
+	And(a=enH,b=h[6],out=hAT6);
+
+	And(a=enA,b=a[7],out=aAT7);
+	And(a=enB,b=b[7],out=bAT7);
+	And(a=enC,b=c[7],out=cAT7);
+	And(a=enD,b=d[7],out=dAT7);
+	And(a=enE,b=e[7],out=eAT7);
+	And(a=enF,b=f[7],out=fAT7);
+	And(a=enG,b=g[7],out=gAT7);
+	And(a=enH,b=h[7],out=hAT7);
+
+	And(a=enA,b=a[8],out=aAT8);
+	And(a=enB,b=b[8],out=bAT8);
+	And(a=enC,b=c[8],out=cAT8);
+	And(a=enD,b=d[8],out=dAT8);
+	And(a=enE,b=e[8],out=eAT8);
+	And(a=enF,b=f[8],out=fAT8);
+	And(a=enG,b=g[8],out=gAT8);
+	And(a=enH,b=h[8],out=hAT8);
+
+	And(a=enA,b=a[9],out=aAT9);
+	And(a=enB,b=b[9],out=bAT9);
+	And(a=enC,b=c[9],out=cAT9);
+	And(a=enD,b=d[9],out=dAT9);
+	And(a=enE,b=e[9],out=eAT9);
+	And(a=enF,b=f[9],out=fAT9);
+	And(a=enG,b=g[9],out=gAT9);
+	And(a=enH,b=h[9],out=hAT9);
+
+	And(a=enA,b=a[10],out=aAT10);
+	And(a=enB,b=b[10],out=bAT10);
+	And(a=enC,b=c[10],out=cAT10);
+	And(a=enD,b=d[10],out=dAT10);
+	And(a=enE,b=e[10],out=eAT10);
+	And(a=enF,b=f[10],out=fAT10);
+	And(a=enG,b=g[10],out=gAT10);
+	And(a=enH,b=h[10],out=hAT10);
+
+	And(a=enA,b=a[11],out=aAT11);
+	And(a=enB,b=b[11],out=bAT11);
+	And(a=enC,b=c[11],out=cAT11);
+	And(a=enD,b=d[11],out=dAT11);
+	And(a=enE,b=e[11],out=eAT11);
+	And(a=enF,b=f[11],out=fAT11);
+	And(a=enG,b=g[11],out=gAT11);
+	And(a=enH,b=h[11],out=hAT11);
+
+	And(a=enA,b=a[12],out=aAT12);
+	And(a=enB,b=b[12],out=bAT12);
+	And(a=enC,b=c[12],out=cAT12);
+	And(a=enD,b=d[12],out=dAT12);
+	And(a=enE,b=e[12],out=eAT12);
+	And(a=enF,b=f[12],out=fAT12);
+	And(a=enG,b=g[12],out=gAT12);
+	And(a=enH,b=h[12],out=hAT12);
+
+	And(a=enA,b=a[13],out=aAT13);
+	And(a=enB,b=b[13],out=bAT13);
+	And(a=enC,b=c[13],out=cAT13);
+	And(a=enD,b=d[13],out=dAT13);
+	And(a=enE,b=e[13],out=eAT13);
+	And(a=enF,b=f[13],out=fAT13);
+	And(a=enG,b=g[13],out=gAT13);
+	And(a=enH,b=h[13],out=hAT13);
+
+	And(a=enA,b=a[14],out=aAT14);
+	And(a=enB,b=b[14],out=bAT14);
+	And(a=enC,b=c[14],out=cAT14);
+	And(a=enD,b=d[14],out=dAT14);
+	And(a=enE,b=e[14],out=eAT14);
+	And(a=enF,b=f[14],out=fAT14);
+	And(a=enG,b=g[14],out=gAT14);
+	And(a=enH,b=h[14],out=hAT14);
+
+	And(a=enA,b=a[15],out=aAT15);
+	And(a=enB,b=b[15],out=bAT15);
+	And(a=enC,b=c[15],out=cAT15);
+	And(a=enD,b=d[15],out=dAT15);
+	And(a=enE,b=e[15],out=eAT15);
+	And(a=enF,b=f[15],out=fAT15);
+	And(a=enG,b=g[15],out=gAT15);
+	And(a=enH,b=h[15],out=hAT15);
+
+    Or8(a=aAT0, b=bAT0, c=cAT0, d=dAT0, e=eAT0, f=fAT0, g=gAT0, h=hAT0);
+    Or8(a=aAT1, b=bAT1, c=cAT1, d=dAT1, e=eAT1, f=fAT1, g=gAT1, h=hAT1);
+    Or8(a=aAT2, b=bAT2, c=cAT2, d=dAT2, e=eAT2, f=fAT2, g=gAT2, h=hAT2);
+    Or8(a=aAT3, b=bAT3, c=cAT3, d=dAT3, e=eAT3, f=fAT3, g=gAT3, h=hAT3);
+    Or8(a=aAT4, b=bAT4, c=cAT4, d=dAT4, e=eAT4, f=fAT4, g=gAT4, h=hAT4);
+    Or8(a=aAT5, b=bAT5, c=cAT5, d=dAT5, e=eAT5, f=fAT5, g=gAT5, h=hAT5);
+    Or8(a=aAT6, b=bAT6, c=cAT6, d=dAT6, e=eAT6, f=fAT6, g=gAT6, h=hAT6);
+    Or8(a=aAT7, b=bAT7, c=cAT7, d=dAT7, e=eAT7, f=fAT7, g=gAT7, h=hAT7);
+    Or8(a=aAT8, b=bAT8, c=cAT8, d=dAT8, e=eAT8, f=fAT8, g=gAT8, h=hAT8);
+    Or8(a=aAT9, b=bAT9, c=cAT9, d=dAT9, e=eAT9, f=fAT9, g=gAT9, h=hAT9);
+    Or8(a=aAT10, b=bAT10, c=cAT10, d=dAT10, e=eAT10, f=fAT10, g=gAT10, h=hAT10);
+    Or8(a=aAT11, b=bAT11, c=cAT11, d=dAT11, e=eAT11, f=fAT11, g=gAT11, h=hAT11);
+    Or8(a=aAT12, b=bAT12, c=cAT12, d=dAT12, e=eAT12, f=fAT12, g=gAT12, h=hAT12);
+    Or8(a=aAT13, b=bAT13, c=cAT13, d=dAT13, e=eAT13, f=fAT13, g=gAT13, h=hAT13);
+    Or8(a=aAT14, b=bAT14, c=cAT14, d=dAT14, e=eAT14, f=fAT14, g=gAT14, h=hAT14);
+    Or8(a=aAT15, b=bAT15, c=cAT15, d=dAT15, e=eAT15, f=fAT15, g=gAT15, h=hAT15);
+}
